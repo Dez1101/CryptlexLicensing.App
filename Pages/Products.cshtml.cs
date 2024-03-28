@@ -38,7 +38,7 @@ namespace CryptlexLicensingApp.Pages
             }
             catch (Exception ex)
             {
-                Console.Write(ex);
+                _logger.LogError($"{ex}");
                 throw;
             }
         }
@@ -73,28 +73,27 @@ namespace CryptlexLicensingApp.Pages
             try
             {
                 string jsonString = JsonSerializer.Serialize(ProductResponses);
+                var downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+                var filePath = Path.Combine(downloadsFolder, "products.json");
 
-                // Set the file name and content type for the download
-                var fileName = "products.json";
-                var contentType = "application/json";
+                SaveJsonToFile(filePath, jsonString);
 
-                // Return a FileResult with the JSON data, prompting the user to download the file
-                return File(Encoding.UTF8.GetBytes(jsonString), contentType, fileName);
+                _logger.LogInformation("Products saved to file: {FilePath}", filePath);
+
+                return RedirectToPage(); 
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error saving products to file");
-                return Page(); // Return the current page if an error occurs
+                return Page();
             }
         }
-
-
-        private async Task SaveJsonToFile(string filePath, string jsonString)
+        private void SaveJsonToFile(string filePath, string jsonString)
         {
             using (var writer = new StreamWriter(filePath))
             {
-                await writer.WriteAsync(jsonString);
+                writer.Write(jsonString);
             }
         }
-    }
+    } 
 }
