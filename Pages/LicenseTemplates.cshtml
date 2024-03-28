@@ -1,0 +1,146 @@
+﻿@page
+@model CryptlexLicensingApp.Pages.LicenseTemplatesModel
+
+@{
+    ViewData["Title"] = "Licenses Templates";
+}
+
+<h2>Licenses Templates</h2>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#licenseTemplateModal">
+    Add License Template
+</button>
+
+@if (Model.licenseTemplates.Count > 0)
+{
+    <table class="table table-striped table-hover table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Validity</th>
+                <th scope="col">Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var licenseTemplates in Model.licenseTemplates)
+            {
+                <tr>
+                    <td>@licenseTemplates.Name</td>
+                    <td>@licenseTemplates.Validity</td>
+                    <td>@licenseTemplates.Type</td>
+                    <td>
+                        <a class="btn btn-info btn-sm">Details</a>
+                        <a class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No products available.</p>
+}
+
+<!-- Modal -->
+<div class="modal fade" id="licenseTemplateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add License Template</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="licenseForm">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="allowClientLeaseDuration" name="allowClientLeaseDuration">
+                        <label class="form-check-label" for="allowClientLeaseDuration">Allow Client Lease Duration</label>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="allowContainerActivation" name="allowContainerActivation">
+                        <label class="form-check-label" for="allowContainerActivation">Allow Container Activation</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="allowedActivations" class="form-label">Allowed Activations</label>
+                        <input type="number" class="form-control" id="allowedActivations" name="allowedActivations" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="allowedClockOffset" class="form-label">Allowed Clock Offset</label>
+                        <input type="number" class="form-control" id="allowedClockOffset" name="allowedClockOffset" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="allowedDeactivations" class="form-label">Allowed Deactivations</label>
+                        <input type="number" class="form-control" id="allowedDeactivations" name="allowedDeactivations" required>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="allowVmActivation" name="allowVmActivation">
+                        <label class="form-check-label" for="allowVmActivation">Allow VM Activation</label>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="disableClockValidation" name="disableClockValidation">
+                        <label class="form-check-label" for="disableClockValidation">Disable Clock Validation</label>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="disableGeoLocation" name="disableGeoLocation">
+                        <label class="form-check-label" for="disableGeoLocation">Disable GeoLocation</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="expirationStrategy" class="form-label">Expiration Strategy</label>
+                        <select class="form-select" id="expirationStrategy" name="expirationStrategy" required>
+                            <option value="immediate">Immediate</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="expiringSoonEventOffset" class="form-label">Expiring Soon Event Offset</label>
+                        <input type="number" class="form-control" id="expiringSoonEventOffset" name="expiringSoonEventOffset" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fingerprintMatchingStrategy" class="form-label">Fingerprint Matching Strategy</label>
+                        <select class="form-select" id="fingerprintMatchingStrategy" name="fingerprintMatchingStrategy" required>
+                            <option value="fuzzy">Fuzzy</option>
+                            <option value="exact">Exact</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="serverSyncGracePeriod" class="form-label">Server Sync Grace Period</label>
+                        <input type="number" class="form-control" id="serverSyncGracePeriod" name="serverSyncGracePeriod" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="serverSyncInterval" class="form-label">Server Sync Interval</label>
+                        <input type="number" class="form-control" id="serverSyncInterval" name="serverSyncInterval" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="type" class="form-label">Type</label>
+                        <select class="form-select" id="type" name="type" required>
+                            <option value="node-locked">Node-Locked</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="userLocked" name="userLocked">
+                        <label class="form-check-label" for="userLocked">User Locked</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="validity" class="form-label">Validity</label>
+                        <input type="number" class="form-control" id="validity" name="validity" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('licenseForm').addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        // Close the modal
+        let modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
+        modal.hide();
+    });
+</script>

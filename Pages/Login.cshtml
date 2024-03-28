@@ -1,0 +1,56 @@
+﻿@page
+@model CryptlexLicensingApp.Pages.LoginModel
+
+<div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <main class="form-signin">
+        <form asp-action="Authenticate" asp-controller="Home" method="post">
+            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+            <div class="form-floating">
+                <input type="email" class="form-control" id="floatingEmail" name="email" placeholder="name@example.com">
+                <label for="floatingEmail">Email address</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
+                <label for="floatingPassword">Password</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingAccountId" name="accountId" placeholder="Account Id">
+                <label for="floatingAccountId">Account Id</label>
+            </div>
+            <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+        </form>
+
+        <form asp-action="SignUp" asp-controller="Home" method="get">
+            <button class="btn btn-secondary w-100 mt-3" type="button" data-bs-toggle="modal" data-bs-target="#signupModal">Sign Up</button>
+        </form>
+    </main>
+</div>
+
+<div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="signupModalLabel">Sign Up</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Sign up form -->
+                <form asp-action="SignUp" asp-controller="Home" method="get">
+                    <div class="mb-3">
+                        <label for="signupEmail" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="signupEmail" name="email" placeholder="name@example.com">
+                    </div>
+                    <div class="mb-3">
+                        <label for="signupPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="signupPassword" name="password" placeholder="Password">
+                    </div>
+                    <div class="mb-3">
+                        <label for="signupAccountId" class="form-label">Account ID</label>
+                        <input type="text" class="form-control" id="signupAccountId" name="accountId" placeholder="Account ID">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
