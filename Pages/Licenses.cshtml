@@ -43,7 +43,7 @@
 }
 else
 {
-    <p>No products available.</p>
+    <p>No licenses available.</p>
 }
 
 <div>
@@ -52,14 +52,22 @@ else
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add Product</h4>
+                    <h4 class="modal-title">Add License</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <form id="userForm">
                         <div class="form-group">
                             <label for="productId">Product Id:</label>
-                            <input type="text" id="productId" name="Product Id" class="form-control" required>
+                            <select id="productId" name="productId" class="form-control" required>
+                                @if (Model.ProductResponses?.Count > 0)
+                                {
+                                    @foreach (var product in Model.ProductResponses)
+                                    {
+                                        <option value="@product.Id">@product.Name</option>
+                                    }
+                                }
+                                />
                         </div>
                         <div class="modal-footer">
                             <button type="button" id="closeButton" class="btn btn-default" data-dismiss="modal">Cancel</button>
