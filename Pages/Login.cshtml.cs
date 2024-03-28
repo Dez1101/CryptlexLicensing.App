@@ -20,6 +20,12 @@ namespace CryptlexLicensingApp.Pages
         public string Password { get; set; }
         [BindProperty]
         public string AccountId { get; set; }
+        [BindProperty]
+        public string FirstName { get; set; }
+        [BindProperty]
+        public string LastName { get; set; }
+        [BindProperty]
+        public string Company { get; set; }
 
         public void OnGet()
         {
@@ -60,9 +66,47 @@ namespace CryptlexLicensingApp.Pages
 
             return Page();
         }
+
+        public async Task<IActionResult> OnPostCreateUser()
+        {
+            if (!string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Password) && !string.IsNullOrEmpty(AccountId)
+                && !string.IsNullOrEmpty(FirstName) && !string.IsNullOrEmpty(LastName) && !string.IsNullOrEmpty(Company))
+            {
+                var requestData = new
+                {
+                    accountId = AccountId,
+                    email = Email,
+                    password = Password,
+                    firstName = FirstName,
+                    lastName = LastName,
+                    company = Company
+                };
+
+                _logger.LogInformation("Sending create user request: {RequestData}", requestData);
+
+                var createUserResponse = await _httpService.SendPostAsync<CreateUserResponse>("v3/accounts", requestData, false);
+
+                if (createUserResponse is not null)
+                {
+                    _logger.LogInformation("User created successfully.");
+
+                    // You may add additional logic here, such as automatically signing in the user after creation.
+
+                    return RedirectToPage("/Index");
+                }
+            }
+
+            // Handle the case where user creation fails
+            return Page();
+        }
         private class AuthResponse
         {
             public string AccessToken { get; set; }
+        }
+
+        private class CreateUserResponse
+        {
+            public string AccountId { get; set; }
         }
     }
 }

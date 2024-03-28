@@ -1,21 +1,10 @@
 ﻿namespace CryptlexLicensingApp.Models;
 
-public class LicenseTemplateRequest
+public class LicenceTemplate
 {
-    public string Name { get; set; }
-    public string FingerprintMatchingStrategy { get; set; }
-    public bool AllowVmActivation { get; set; }
-    public bool AllowContainerActivation { get; set; }
-    public bool UserLocked { get; set; }
-    public bool DisableGeoLocation { get; set; }
-    public string AllowedIpRange { get; set; }
-    public List<string> AllowedIpRanges { get; set; }
-    public List<string> AllowedCountries { get; set; }
-    public List<string> DisallowedCountries { get; set; }
-    public List<string> AllowedIpAddresses { get; set; }
-    public List<string> DisallowedIpAddresses { get; set; }
     public int Validity { get; set; }
     public string ExpirationStrategy { get; set; }
+    public string FingerprintMatchingStrategy { get; set; }
     public int AllowedActivations { get; set; }
     public int AllowedDeactivations { get; set; }
     public string Type { get; set; }
@@ -29,18 +18,47 @@ public class LicenseTemplateRequest
     public int AllowedClockOffset { get; set; }
     public bool DisableClockValidation { get; set; }
     public int ExpiringSoonEventOffset { get; set; }
-    public List<string> RequiredMetadataKeys { get; set; }
-    public List<string> RequiredMeterAttributes { get; set; }
+    public bool RequireAuthentication { get; set; }
+    public object[] RequiredMetadataKeys { get; set; }
+    public object[] RequiredMeterAttributes { get; set; }
+    public string Name { get; set; }
+    public bool AllowVmActivation { get; set; }
+    public bool AllowContainerActivation { get; set; }
+    public bool UserLocked { get; set; }
+    public bool DisableGeoLocation { get; set; }
+    public object AllowedIpRange { get; set; }
+    public object[] AllowedIpRanges { get; set; }
+    public object[] AllowedCountries { get; set; }
+    public object[] DisallowedCountries { get; set; }
+    public object[] AllowedIpAddresses { get; set; }
+    public object[] DisallowedIpAddresses { get; set; }
+    public string Id { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
 
-    public LicenseTemplateRequest()
-    {
-        AllowedIpRanges = new List<string>();
-        AllowedCountries = new List<string>();
-        DisallowedCountries = new List<string>();
-        AllowedIpAddresses = new List<string>();
-        DisallowedIpAddresses = new List<string>();
-        RequiredMetadataKeys = new List<string>();
-        RequiredMeterAttributes = new List<string>();
-    }
+}
+
+public class ProductPostResponse
+{
+    public string Name { get; set; }
+    public string DisplayName { get; set; }
+    public string Description { get; set; }
+    public string PublicKey { get; set; }
+    public int TotalLicenses { get; set; }
+    public int TotalTrialActivations { get; set; }
+    public int TotalReleases { get; set; }
+    public int TotalProductVersions { get; set; }
+    public int TotalFeatureFlags { get; set; }
+    public object[] EmailTemplates { get; set; }
+    public object[] AutomatedEmails { get; set; }
+    public string LicenseTemplateId { get; set; }
+    public object TrialPolicyId { get; set; }
+    public Licensepolicy LicensePolicy { get; set; }
+    public object TrialPolicy { get; set; }
+    public object[] Metadata { get; set; }
+    public string Id { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
+
 }
 

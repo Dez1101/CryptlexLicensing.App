@@ -11,11 +11,11 @@ public class LicenseTemplatesModel(ILogger<LoginModel> logger, HttpService httpS
 {
     private readonly ILogger<LoginModel> _logger = logger;
     private readonly HttpService _httpService = httpService;
-    public List<LicenseTemplateRequest>  licenseTemplates { get; set; } = [];
+    public List<LicenceTemplate>  licenseTemplates { get; set; } = [];
 
     private async Task GetLicenses()
     {
-        licenseTemplates = await _httpService.SendGetAsync<List<LicenseTemplateRequest>>("v3/license-templates");
+        licenseTemplates = await _httpService.SendGetAsync<List<LicenceTemplate>>("v3/license-templates");
         _logger.LogInformation("License Templates: {Count}", licenseTemplates.Count);
     }
 }

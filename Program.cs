@@ -36,6 +36,7 @@ void Configure(WebApplication app)
         app.UseDeveloperExceptionPage();
     }
 
+    app.UseMiddleware<ExceptionHandlingMiddleware>();
     app.UseStaticFiles();
     app.UseRouting();
     app.UseHttpsRedirection();
