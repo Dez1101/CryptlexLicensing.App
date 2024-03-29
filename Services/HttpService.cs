@@ -20,7 +20,7 @@ namespace CryptlexLicensingApp.Services
         {
             if (string.IsNullOrEmpty(token))
             {
-                DefaultRequestHeaders.Authorization = null;             
+                DefaultRequestHeaders.Authorization = null;
             }
             else
             {
@@ -59,6 +59,11 @@ namespace CryptlexLicensingApp.Services
                 if (!string.IsNullOrEmpty(jsonString))
                     returnData = JsonSerializer.Deserialize<TDeserializedOutput>(jsonString, Options);
             }
+            else if (response?.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                throw new UnauthorizedAccessException();
+            }
+            else throw new Exception();
 
             return returnData;
         }

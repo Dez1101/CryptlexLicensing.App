@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CryptlexLicensingApp.Pages
 {
+    [Authorize]
     public class LicensesModel(ILogger<LoginModel> logger, HttpService httpService) : PageModel
     {
         private readonly ILogger<LoginModel> _logger = logger;
@@ -39,7 +40,7 @@ namespace CryptlexLicensingApp.Pages
         private async Task GetLicenses()
         {
             Licences = await _httpService.SendGetAsync<List<License>>("v3/licenses");
-            _logger.LogInformation("Licenses: {Count}", Licences.Count);
+            _logger.LogInformation("Licenses: {Count}", Licences?.Count);
         }
 
         public async Task OnPost()
